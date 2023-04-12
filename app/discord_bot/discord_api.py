@@ -4,10 +4,11 @@ from discord.ext import commands
 import os 
 from app.chatgpt_ai.openai import chatgpt_response 
 
-from help_cog import help_cog #help message at beginning
-from music_cog import music_cog #music functionality
+from help import help_function #help message at beginning
+from music import music_function #music functionality
 
 bot = commands.Bot(command_prefix="-") #ensures the bot is called with prefix of '-' 
+bot.remove_command("help")
 
 load_dotenv() #loads variables from env file 
 
