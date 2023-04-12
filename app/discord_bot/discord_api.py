@@ -4,11 +4,18 @@ from discord.ext import commands
 import os 
 from app.chatgpt_ai.openai import chatgpt_response 
 
-from helpdesk import help_function #help message at beginning
-from music import music_function #music functionality
+from app.discord_bot.helpdesk import help_function #help message at beginning
+from app.discord_bot.music import music_function #music functionality
 
-bot = commands.Bot(command_prefix="-") #ensures the bot is called with prefix of '-' 
-bot.remove_command("help")
+intents = discord.Intents.default() 
+intents.message_content = True 
+
+bot = commands.Bot(command_prefix="-",intents=intents) #ensures the bot is called with prefix of '-' 
+bot.remove_command("help") #removes inbuilt help function 
+
+#register the class with the bot
+bot.add_cog(help_function(bot))
+bot.add_cog(music_function(bot))
 
 load_dotenv() #loads variables from env file 
 
@@ -26,8 +33,5 @@ class MyClient(discord.Client) :
         if message.content.startswith ('!ai') or message.content.startswith('!bot'):
             bot_response = chatgpt_response(message.content) #calls a function of AI
             await message.channel.send(f"Answer: {bot_response}")
-
-intents = discord.Intents.default() 
-intents.message_content = True 
 
 client = MyClient(intents=intents)
