@@ -67,20 +67,23 @@ class music_cog(commands.Cog) :
         else:
             self.is_playing = False
 
-    @commands.command(name="play", aliases="p", help="plays a selected song from youtube") #defining the function
+    #plays music 
+
+    @commands.command(name="play", aliases=["p"], help="plays a selected song from youtube") #defining the function
     
     async def play(self, ctx, *args):
-        query = " ".join(args)
+        query = " ".join(args) 
         
         voice_channel = ctx.author.voice.channel
         if voice_channel is None:
 
             #needs to be connected so that the bot knows where to go
             await ctx.send("Connect to a voice channel!")
-        elif self.is_paused:
+
+        elif self.is_paused: #if paused 
             self.vc.resume()
         else:
-            song = self.search_yt(query)
+            song = self.search_yt(query) #need to search music on yt
             if type(song) == type(True):
                 await ctx.send("Could not download the song. Incorrect format try another keyword.")
             else:
@@ -90,4 +93,62 @@ class music_cog(commands.Cog) :
                 if self.is_playing == False:
                     await self.play_music(ctx)
 
+    #pauses song
+
+    @commands.command(name="pause", help="pauses the current song")
+    
+    async def pause(self, ctx, *args):
         
+        if self.is_playing :
+            self.is_playing = False
+            self.is_paused = True
+            self.vc.pause()
+        
+        elif self.is_paused :
+            self.is_paused = False
+            self.is_playing = True
+            self.vc.resume()
+
+    #resumes playing song
+
+    @commands.command(name = "resume", aliases=["r"], help="resumes")
+    
+    async def resume(self, ctx, *args):
+        if self.is_paused:
+            self.is_paused = False
+            self.is_playing = True
+            self.vc.resume()
+
+    #skips song 
+
+    @commands.command(name="skip", aliases=["s"], help="Skips the current song being played")
+    
+    async def skip(self, ctx):
+        if self.vc != None and self.vc:
+            self.vc.stop()
+            await self.play_music(ctx) #tries to play next in the queue if it exists
+
+    #displays top 5 songs in queue
+
+    @commands.command(name="queue", aliases=["q"], help="displays the first 5 songs in queue")
+    
+    async def queue(self, ctx):
+        retval = ""
+        for i in range(0, len(self.music_queue)):
+            if (i > 4): break
+            retval += self.music_queue[i][0]['title'] + "\n"
+
+        if retval != "":
+            await ctx.send(retval)
+        else:
+            await ctx.send("no music in queue")
+
+    #clearing queue 
+
+    @commands.command(name="clear", aliases=["c", "bin"], help="Stops the music and clears the queue")
+    
+    async def clear(self, ctx):
+        if self.vc != None and self.is_playing:
+            self.vc.stop()
+        self.music_queue = []
+        await ctx.send("music queue cleared")
