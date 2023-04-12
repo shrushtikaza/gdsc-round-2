@@ -4,7 +4,7 @@ from discord.ext import commands
 import os 
 from app.chatgpt_ai.openai import chatgpt_response 
 
-from help import help_function #help message at beginning
+from helpdesk import help_function #help message at beginning
 from music import music_function #music functionality
 
 bot = commands.Bot(command_prefix="-") #ensures the bot is called with prefix of '-' 
