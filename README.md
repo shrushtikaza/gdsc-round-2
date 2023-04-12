@@ -29,5 +29,7 @@ Function 2 :
 Libraries used: 
 - discord : discord library with built-in functions.
 - openai : openai library. 
-- dotenv : helps working with .env files 
-- os : connects code to the operating system
+- dotenv : helps working with .env files. 
+- ffmpeg : handle multimedia files.
+- PyNaCl : improves usability, security and speed.
+- youtube_dl : to search youtube for songs. 
