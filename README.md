@@ -1,9 +1,23 @@
-# gdsc round 2
-Coding a Discord Bot in Python :
-step 1 - accessing Discord API.
-step 2 - creating Discord application and creating a bot.
-step 3 - creating Discord server and adding the bot to server.
-step 4 - connecting the code to Discord.
-4(i) - instance called Client is created. 
-4(ii) - file with .env is created, import dotenv/load_dotenv().
-step 5 - 
+CODING A DISCORD BOT WITH PYTHON 
+
+Functionality :
+- Responding to user messages in Discord using openAI GPT-3 AI. 
+- 
+
+Steps : 
+
+1. Create Discord Application and a bot within it. 
+2. Add bot to a guild (server).
+3. Connect written code to Discord. 
+4. Create .env file with unique token of the bot and the api key. 
+5. Two main set of codes are used - one for discord functions and the other for AI response. [discord_api.py and chatgpt_ai.py] 
+6. run.py - used to run the code. 
+
+
+
+
+Libraries used: 
+- discord : discord library with built-in functions.
+- openai : openai library. 
+- dotenv : helps working with .env files 
+- os : connects code to the operating system
