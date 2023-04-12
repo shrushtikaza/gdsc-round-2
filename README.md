@@ -19,7 +19,8 @@ Function 2 :
 
 1. Set command prefix as '-' to ensure that music functionality occurs only with '-' followed by a command.
 2. Call music functionality, help to main discord bot functions code. [discord_api.py] 
-3. Functions like play, pause, skip are defined in music functionality code. [music_cog.py]
+3. Functions like play, pause, skip are defined in music functionality code. [music.py]
+4. Code to display all the working/commands of the bot are defined in helpdesk code. [helpdesk.py]
 
 Libraries used: 
 - discord : discord library with built-in functions.
