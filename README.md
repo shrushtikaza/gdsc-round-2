@@ -17,11 +17,8 @@ Function 1 :
 
 Function 2 : 
 
-1. Create Discord Application and a bot within it. 
-2. Add bot to a guild (server).
-3. Connect written code to Discord. 
-4. Create .env file with unique token of the bot.
-5. Call music functionality, help to main discord functions code [discord_api.py] 
+1. Set command prefix as '-' to ensure that music functionality occurs only with '-' followed by a command.
+2. Call music functionality, help to main discord functions code [discord_api.py] 
 
 
 
