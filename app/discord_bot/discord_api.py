@@ -1,12 +1,17 @@
 from dotenv import load_dotenv 
 import discord 
+from discord.ext import commands 
 import os 
 from app.chatgpt_ai.openai import chatgpt_response 
-import random 
+
+from help_cog import help_cog #help message at beginning
+from music_cog import music_cog #music functionality
+
+bot = commands.Bot(command_prefix="-") 
 
 load_dotenv() #loads variables from env file 
 
-discord_token = os.getenv('DISCORD_TOKEN') 
+discord_token = os.getenv('DISCORD_TOKEN') #storing discord token
 
 class MyClient(discord.Client) :
     async def on_ready(self) :
@@ -16,10 +21,9 @@ class MyClient(discord.Client) :
         print(message.content) #prints content of msg to console 
         if message.author == self.user : #checking if the msg was sent by bot to avoid bot from replying to itself
             return 
-        command, user_message = None, None 
 
-        if message.content.startswith ('!ai') or message.content.startswith('!smorkbot'):
-            bot_response = chatgpt_response(user_message) #calls a function of AI
+        if message.content.startswith ('!ai') or message.content.startswith('!bot'):
+            bot_response = chatgpt_response(message.content) #calls a function of AI
             await message.channel.send(f"Answer: {bot_response}")
 
 intents = discord.Intents.default() 
